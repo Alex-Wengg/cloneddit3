@@ -151,7 +151,7 @@ export default class UserResolver {
     const errors: FieldError[] = [];
 
     const isEmail = usernameOrEmail.includes("@");
-
+    //check if email is formated 
     if (isEmail) {
       const email = usernameOrEmail;
       if (!EMAIL_REGEX.test(email))
@@ -182,7 +182,7 @@ export default class UserResolver {
     if (errors.length > 0) {
       return { errors };
     }
-
+    //find if user exist
     const user = await User.findOne(
       isEmail
         ? { email: usernameOrEmail.toLowerCase() }
@@ -195,7 +195,7 @@ export default class UserResolver {
       });
       return { errors };
     }
-
+  //uses argon2 to check if the user exists
     const isValid = await argon2.verify(user.password, password);
     if (!isValid)
       return {
@@ -214,6 +214,7 @@ export default class UserResolver {
     };
   }
 //===================================================================================
+  //logout
   @Mutation(() => Boolean)
   logout(@Ctx() { req, res }: MyContext): Promise<boolean> {
     return new Promise((resolve) =>
