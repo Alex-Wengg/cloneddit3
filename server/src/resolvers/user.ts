@@ -27,7 +27,7 @@ class RegisterInput {
   @Field()
   password!: string;
 }
-
+//===================================================================================
 @InputType()
 class LoginInput {
   @Field()
@@ -36,7 +36,7 @@ class LoginInput {
   @Field()
   password!: string;
 }
-
+//===================================================================================
 @ObjectType()
 class UserResponse {
   @Field(() => [FieldError], { nullable: true })
@@ -45,7 +45,7 @@ class UserResponse {
   @Field(() => User, { nullable: true })
   user?: User;
 }
-
+//===================================================================================
 @ObjectType()
 class FieldError {
   @Field(() => String)
@@ -54,7 +54,7 @@ class FieldError {
   @Field()
   message!: string;
 }
-
+//===================================================================================
 @Resolver(User)
 export default class UserResolver {
   @Query(() => [User])
@@ -62,10 +62,13 @@ export default class UserResolver {
     return User.find();
   }
 
+//===================================================================================
+
   @Query(() => User, { nullable: true })
   user(@Arg("id", () => Int) id: number): Promise<User | undefined> {
     return User.findOne(id);
   }
+//===================================================================================
 
   @Query(() => User, { nullable: true })
   async me(@Ctx() { req }: MyContext): Promise<User | undefined> {
@@ -74,6 +77,7 @@ export default class UserResolver {
     }
     return undefined;
   }
+//===================================================================================
 
   @Mutation(() => UserResponse)
   async register(
@@ -137,7 +141,7 @@ export default class UserResolver {
       user: newUser,
     };
   }
-
+//===================================================================================
   @Mutation(() => UserResponse)
   async login(
     @Arg("options") options: LoginInput,
@@ -209,7 +213,7 @@ export default class UserResolver {
       user,
     };
   }
-
+//===================================================================================
   @Mutation(() => Boolean)
   logout(@Ctx() { req, res }: MyContext): Promise<boolean> {
     return new Promise((resolve) =>
