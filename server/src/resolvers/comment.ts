@@ -15,16 +15,19 @@ import { MyContext } from "../types";
 
 @Resolver(Comment)
 export default class CommentResolver {
+  
+  //find comment from a post.comments[]
   @FieldResolver(() => Post)
   post(@Root() comment: Comment) {
     return Post.findOne(comment.postId);
   }
-
+  // find comment from user.comments[]
   @FieldResolver(() => User)
   user(@Root() comment: Comment) {
     return User.findOne(comment.userId);
   }
 
+  //find post comments
   @Query(() => [Comment])
   async comments(
     @Arg("postId", () => Int) postId: number,
@@ -44,7 +47,7 @@ export default class CommentResolver {
       take: 10,
     });
   }
-
+  //create comment
   @Mutation(() => Comment)
   async comment(
     @Arg("postId", () => Int) postId: number,

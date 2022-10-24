@@ -11,8 +11,8 @@ export const typeormConfig = (
 ): ConnectionOptions => ({
   type: "postgres" as const,
   database: dbName,
-  username: "postgres",
-  password: "password",
+  username: "u",
+  password: "u",
   synchronize: !__prod__,
   dropSchema: reset,
   entities: [User, Post, Upvote, Comment],

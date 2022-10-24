@@ -14,7 +14,6 @@ import { User } from "./User";
 
 @Entity()
 @ObjectType()
-// Comment Entity
 export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field(() => Int)

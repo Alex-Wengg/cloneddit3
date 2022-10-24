@@ -36,6 +36,9 @@ export class Post extends BaseEntity {
   @Field(() => Int)
   creatorId!: number;
 
+  // @OneToOne(() => Community, (community) => community.id)
+  // comments!: Comment;
+
   @ManyToOne(() => User, (creator) => creator.posts)
   @Field(() => User)
   creator!: User;

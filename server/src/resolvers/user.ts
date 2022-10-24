@@ -27,7 +27,7 @@ class RegisterInput {
   @Field()
   password!: string;
 }
-//===================================================================================
+
 @InputType()
 class LoginInput {
   @Field()
@@ -36,7 +36,7 @@ class LoginInput {
   @Field()
   password!: string;
 }
-//===================================================================================
+
 @ObjectType()
 class UserResponse {
   @Field(() => [FieldError], { nullable: true })
@@ -45,7 +45,7 @@ class UserResponse {
   @Field(() => User, { nullable: true })
   user?: User;
 }
-//===================================================================================
+
 @ObjectType()
 class FieldError {
   @Field(() => String)
@@ -54,7 +54,7 @@ class FieldError {
   @Field()
   message!: string;
 }
-//===================================================================================
+
 @Resolver(User)
 export default class UserResolver {
   @Query(() => [User])
@@ -62,13 +62,10 @@ export default class UserResolver {
     return User.find();
   }
 
-//===================================================================================
-
   @Query(() => User, { nullable: true })
   user(@Arg("id", () => Int) id: number): Promise<User | undefined> {
     return User.findOne(id);
   }
-//===================================================================================
 
   @Query(() => User, { nullable: true })
   async me(@Ctx() { req }: MyContext): Promise<User | undefined> {
@@ -77,7 +74,6 @@ export default class UserResolver {
     }
     return undefined;
   }
-//===================================================================================
 
   @Mutation(() => UserResponse)
   async register(
@@ -141,7 +137,7 @@ export default class UserResolver {
       user: newUser,
     };
   }
-//===================================================================================
+
   @Mutation(() => UserResponse)
   async login(
     @Arg("options") options: LoginInput,
@@ -151,7 +147,7 @@ export default class UserResolver {
     const errors: FieldError[] = [];
 
     const isEmail = usernameOrEmail.includes("@");
-    //check if email is formated 
+
     if (isEmail) {
       const email = usernameOrEmail;
       if (!EMAIL_REGEX.test(email))
@@ -182,7 +178,7 @@ export default class UserResolver {
     if (errors.length > 0) {
       return { errors };
     }
-    //find if user exist
+
     const user = await User.findOne(
       isEmail
         ? { email: usernameOrEmail.toLowerCase() }
@@ -195,7 +191,7 @@ export default class UserResolver {
       });
       return { errors };
     }
-  //uses argon2 to check if the user exists
+
     const isValid = await argon2.verify(user.password, password);
     if (!isValid)
       return {
@@ -213,8 +209,7 @@ export default class UserResolver {
       user,
     };
   }
-//===================================================================================
-  //logout
+
   @Mutation(() => Boolean)
   logout(@Ctx() { req, res }: MyContext): Promise<boolean> {
     return new Promise((resolve) =>
