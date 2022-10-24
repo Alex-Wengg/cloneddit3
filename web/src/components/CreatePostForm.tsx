@@ -41,7 +41,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = () => {
     formData.append("signature", signature);
 
     const response = await fetch(
-      "https://api.cloudinary.com/v1_1/tusharsadhwani/image/upload",
+      "https://api.cloudinary.com/v1_1/dodfqsd10/image/upload",
       {
         method: "POST",
         body: formData,
