@@ -93,3 +93,4 @@ Testing: run `yarn test:frontend` in the `server` folder and `yarn test` in the
 [1]: https://www.youtube.com/watch?v=I6ypD7qv3Z8
 [2]: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-20-04
 [3]: https://dev.to/tusharsadhwani/how-to-setup-postgresql-on-manjaro-linux-arch-412l
+https://codesandbox.io/s/react-drag-and-drop-react-beautiful-dnd-forked-qxgggy?file=/src/index.js:1085-1568
